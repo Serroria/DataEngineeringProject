@@ -73,12 +73,18 @@ producer = KafkaProducer(
         ).encode("utf-8")
 )
 
+# producer.send("transactions", value={
+#     "transaction_id": "...",
+#     "amount": 1000,
+#     "timestamp": "2024-01-01T12:00:00Z"
+# })
+
 
 # ============================================================================
 # ANOMALY INJECTION
 # ============================================================================
 
-def inject_anomaly(data, index):
+def inject_anomaly(data, index, previous_record=None):
     """
     Membuat beberapa data invalid secara sengaja.
 
@@ -163,10 +169,10 @@ def inject_anomaly(data, index):
         # data["ProductNo"] = "DUPLICATE_PRODUCT"
         if previous_record is not None:
             data["TransactionNo"] = (
-                previous_record("TransactionNo")
+                previous_record["TransactionNo"]
             )
             data["ProductNo"] = (
-                previous_record("ProductNo")
+                previous_record["ProductNo"]
             )
 
 

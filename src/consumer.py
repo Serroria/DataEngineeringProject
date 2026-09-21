@@ -34,9 +34,8 @@ from datetime import datetime
 import pandas as pd
 from kafka import KafkaConsumer, KafkaProducer
 
-from validation import validate_microbatch
-from metrics import MetricsTracker
-
+from .validation import validate_microbatch
+from .metrics import MetricsTracker
 
 # ============================================================================
 # KONFIGURASI 
@@ -91,7 +90,19 @@ INVALID_FILE = os.path.join(
 # ============================================================================
 # KAFKA CONSUMER
 # ============================================================================
-
+def safe_deserialize(value):
+    """Deserialize value Kafka dengan aman."""
+    if value is None:
+        return None
+    try:
+        return json.loads(value.decode("utf-8"))
+    except (json.JSONDecodeError, UnicodeDecodeError) as e:
+        # Kembalikan dict khusus supaya tidak crash
+        return {
+            "_raw": value.decode("utf-8", errors="replace"),
+            "_error": f"deserialization_failed: {e}",
+        }
+    
 consumer = KafkaConsumer(
     INPUT_TOPIC,
 
@@ -103,9 +114,8 @@ consumer = KafkaConsumer(
 
     enable_auto_commit=True,
 
-    value_deserializer=lambda value:
-        json.loads(value.decode("utf-8")),
-
+   value_deserializer=safe_deserialize,
+   
     consumer_timeout_ms=1000,
 )
 
@@ -233,6 +243,17 @@ def process_microbatch(records, batch_number):
 
     if not records:
         return
+
+       # Filter record yang gagal deserialize
+    clean_records = [r for r in records if r and "_error" not in r]
+    dropped = len(records) - len(clean_records)
+    if dropped:
+        print(f"[WARN] {dropped} record gagal deserialize, dilewati.")
+
+    if not clean_records:
+        return
+
+    records = clean_records
 
     start_time = time.perf_counter()
 
