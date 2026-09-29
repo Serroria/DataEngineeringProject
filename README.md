@@ -12,7 +12,7 @@ bin\windows\kafka-storage.bat random-uuid
 - Format storage dengan UUID
 bin\windows\kafka-storage.bat format -t <UUID-yang-tadi> -c config\server.properties
 
--Menjalkan brokernya (CMD jangan di tutup)
+- Menjalkan brokernya (CMD jangan di tutup)
 bin\windows\kafka-storage.bat format --standalone -t aONxBJzaREuvUYftU8U5-Q -c config\server.properties
 
 -jika sudah pernah menjalankan kafka cukup :
