@@ -1,6 +1,8 @@
 buat folder 
 <img width="364" height="403" alt="image" src="https://github.com/user-attachments/assets/a3caa76c-6be6-407a-b7be-c85c8308f93d" />
 
+URUTAN : Install Kafka 4.3.1
+
 urutan menjalakan kafka buka cmd di directory kafka
 CMD 1 
 1. Jalankan kafka broker
@@ -16,7 +18,7 @@ bin\windows\kafka-storage.bat format -t <UUID-yang-tadi> -c config\server.proper
 bin\windows\kafka-storage.bat format --standalone -t aONxBJzaREuvUYftU8U5-Q -c config\server.properties
 
 -jika sudah pernah menjalankan kafka cukup :
-.\bin\windows\kafka-server-start.bat .\config\kraft\server.properties
+bin\windows\kafka-server-start.bat config\server.properties
 
 BUKA CMD 2(cmd baru) di directory kafka
 2. BUAT Topic
@@ -36,6 +38,10 @@ Buka CMD 4 (CMD BARU)
 bin\windows\kafka-console-producer.bat --topic transactions --bootstrap-server localhost:9092
 
 ---------------Di VSCODE---------------------------
+Install Library: 
+python -m pip install kafka-python
+pip install great_expectations
+
 terminal 1
 python -m src.consumer
 ketika berjalan, jangan dimatikan, setelah itu jalankan python producer. 
@@ -43,4 +49,4 @@ ketika berjalan, jangan dimatikan, setelah itu jalankan python producer.
 kalau udah muncul semua output baik di consumer dan producer, ctr + c untuk menghentikan program consumer. Ketika dihentikan nanti dia muncul quality_summary.csv
 
 terminal 2
- python -m src.producer
+python -m src.producer
