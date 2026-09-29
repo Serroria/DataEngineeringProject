@@ -1,0 +1,2 @@
+batch_number,total_records,valid_records,invalid_records,processing_time_seconds,throughput_records_per_second,gx_success,gx_failed_expectations
+1,100,96,4,0.16625000000203727,601.5037593911253,False,4
