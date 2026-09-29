@@ -3,3 +3,9 @@ TransactionNo,Date,ProductNo,ProductName,Price,Quantity,CustomerNo,Country,_inje
 581476,INVALID_DATE,23166,Medium Ceramic Top Storage Jar,11.32,48,12433.0,Norway,invalid_date,invalid_date
 581476,12/9/2019,21872,Glamorous Mug,,12,12433.0,Norway,missing_price,missing_required_value;invalid_price
 581476,12/9/2019,47504H,English Rose Spirit Level,,36,12433.0,Norway,missing_price,missing_required_value;invalid_price
+581482,INVALID_DATE,22485,Set Of 2 Wooden Market Crates,21.47,12,17490.0,United Kingdom,invalid_date,invalid_date
+581476,12/9/2019,23167,Small Ceramic Top Storage Jar,10.96,96,12433.0,Norway,,duplicate_transaction_product
+581476,12/9/2019,23167,Medium Ceramic Top Storage Jar,11.32,48,12433.0,Norway,duplicate,duplicate_transaction_product
+581476,12/9/2019,21872,Glamorous Mug,,12,12433.0,Norway,missing_price,missing_required_value;invalid_price
+581476,12/9/2019,47559B,Tea Time Oven Glove,11.53,10,12433.0,Norway,,duplicate_transaction_product
+581476,12/9/2019,47559B,English Rose Spirit Level,11.06,36,12433.0,Norway,duplicate,duplicate_transaction_product
